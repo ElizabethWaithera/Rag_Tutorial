@@ -28,6 +28,14 @@ api_key = os.getenv("OPENAI_API_KEY")
 if not api_key:
     raise ValueError("No OpenAI API key found. Please set the OPENAI_API_KEY environment variable.")
 
+
+# With this code instead
+if not api_key:
+    api_key = st.sidebar.text_input("OpenAI API Key not found in environment variables. Please enter your API key:", type="password")
+    if not api_key:
+        st.warning("Please enter an OpenAI API key to use this application.")
+        st.stop()
+
 # Constants
 DATA_DIR = "knowledge_base"
 CHROMA_DIR = "chroma_db"
