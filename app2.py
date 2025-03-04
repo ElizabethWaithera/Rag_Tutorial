@@ -22,6 +22,10 @@ from langchain.chains import RetrievalQA, LLMChain
 os.environ.clear()
 load_dotenv(override=True)
 
+# Get API key from environment variable
+api_key = os.getenv("OPENAI_API_KEY")
+
+# If not found in environment, ask user to input it
 if not api_key:
     api_key = st.sidebar.text_input("OpenAI API Key not found in environment variables. Please enter your API key:", type="password")
     if not api_key:
