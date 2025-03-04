@@ -10,17 +10,23 @@ import textwrap
 import io
 import tempfile
 
-from langchain.document_loaders import DirectoryLoader, TextLoader, PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-# Updated imports for newer OpenAI client compatibility
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain.vectorstores import Chroma
+from langchain.document_loaders import DirectoryLoader, TextLoader, PyPDFLoader
+from langchain.text_splitters import RecursiveCharacterTextSplitter
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA, LLMChain
 
 # Load environment variables from .env file
-os.environ.clear()
-load_dotenv(override=True)
+load_dotenv()
+
+# Setup page config - MUST BE THE FIRST STREAMLIT COMMAND
+st.set_page_config(
+    page_title="RAG Demo: Compare LLM vs RAG Responses",
+    page_icon="🔍",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 # Get API key from environment variable
 api_key = os.getenv("OPENAI_API_KEY")
@@ -36,6 +42,8 @@ if not api_key:
 DATA_DIR = "knowledge_base"
 CHROMA_DIR = "chroma_db"
 SAMPLE_DOCS_DIR = "sample_docs"
+
+
 
 # Ensure directories exist
 for directory in [DATA_DIR, SAMPLE_DOCS_DIR]:
