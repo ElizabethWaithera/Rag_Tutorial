@@ -22,7 +22,6 @@ from langchain.chains import RetrievalQA, LLMChain
 os.environ.clear()
 load_dotenv(override=True)
 
-
 if not api_key:
     api_key = st.sidebar.text_input("OpenAI API Key not found in environment variables. Please enter your API key:", type="password")
     if not api_key:
